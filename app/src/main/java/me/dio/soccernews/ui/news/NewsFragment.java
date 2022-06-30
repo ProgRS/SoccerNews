@@ -25,7 +25,9 @@ public class NewsFragment extends Fragment {
         View root = binding.getRoot();
 
         //final TextView textView = binding.textNews;
-        newsViewModel.getText().observe(getViewLifecycleOwner(), binding.textNews::setText);
+        newsViewModel.getNews().observe(getViewLifecycleOwner(), news -> {
+            
+        });
         return root;
     }
 
