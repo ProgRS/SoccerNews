@@ -9,9 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 import me.dio.soccernews.databinding.FragmentNewsBinding;
+import me.dio.soccernews.ui.adapters.NewsAdapter;
 
 public class NewsFragment extends Fragment {
 
@@ -24,9 +26,11 @@ public class NewsFragment extends Fragment {
         binding = FragmentNewsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
+         binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
         //final TextView textView = binding.textNews;
         newsViewModel.getNews().observe(getViewLifecycleOwner(), news -> {
-            
+                    binding.rvNews.setAdapter(new NewsAdapter(news));
         });
         return root;
     }
