@@ -39,11 +39,19 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
         Picasso.get().load(news.getImage())
                 .fit()
                 .into(holder.binding.ivThumbnail);
-
+        //Funcionalidade de abrir Link
         holder.binding.btOpenLink.setOnClickListener(view -> {
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(news.getLink()));
             holder.itemView.getContext().startActivity(i);
+        });
+        //Implementação Funcionalidade de compartilhar
+        holder.binding.ivShare.setOnClickListener(view -> {
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_SUBJECT, news.getTitle());
+            i.putExtra(Intent.EXTRA_TEXT, news.getLink());
+            holder.itemView.getContext().startActivity(Intent.createChooser(i, "Share"));
         });
     }
 
